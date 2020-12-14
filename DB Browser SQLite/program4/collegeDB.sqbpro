@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="D:/1by18is093/ISE V SEM/Subjects/18CSL58 - DBMS Laboratory with mini project/program4/collegeDB.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser query pragmas" current="2"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="125"/><column_width id="3" width="2485"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,7:mainSTUDENT"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="CLASS" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="102"/><column index="2" value="56"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="STUDENT" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="102"/><column index="2" value="87"/><column index="3" value="131"/><column index="4" value="97"/><column index="5" value="81"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="Q4 PENDING.sql">/* 4. Calculate the FinalIA (AVGerage of best two test marks) and update the corresponding table for all students. */
+
+CREATE OR REPLACE PROCEDURE AVGGMARKS
+IS
+CURSOR C_IAMARKS IS
+SELECT 	GREATEST(TEST1,TEST2) AS A,
+		GREATEST(TEST1,TEST3) AS B,
+		GREATEST(TEST3,TEST2) AS C,
+FROM IAMARKS
+WHERE FINALIA = 0 FOR UPDATE;
+ 
+ C_A NUMBER;
+ C_B NUMBER;
+ C_C NUMBER;
+ C_SUM NUMBER;
+ C_AVG NUMBER;
+BEGIN
+ OPEN C_IAMARKS;
+ LOOP
+ FETCH C_IAMARKS INTO C_A, C_B, C_C;
+ EXIT WHEN C_IAMARKS%NOTFOUND;
+ DBMS_OUTPUT.PUT_LINE(C_A || ' ' || C_B || ' ' || C_C);
+ IF (C_A != C_B) THEN
+C_SUM:=C_A+C_B;
+ ELSE
+C_SUM:=C_A+C_C;
+ END IF;
+ C_AVG:=C_SUM/2;
+ DBMS_OUTPUT.PUT_LINE('SUM = '||C_SUM);
+ DBMS_OUTPUT.PUT_LINE('AVERAGE = '||C_AVG);
+ UPDATE IAMARKS SET FINALIA=C_AVG WHERE CURRENT OF C_IAMARKS;
+ END LOOP;
+ CLOSE C_IAMARKS;
+END;
+/
+/*Note: Before execution of PL/SQL procedure, IAMARKS table contents are:*/ 
+SELECT * FROM IAMARKS;</sql><sql name="SQL 2">CREATE PROCEDURE SelectAllStudents
+AS
+SELECT * FROM STUDENT
+GO;</sql><current_tab id="1"/></tab_sql></sqlb_project>

@@ -1,0 +1,8 @@
+/* 1. Count the customers with grades above Bangalore’s average. */
+
+SELECT GRADE, COUNT (DISTINCT CUSTOMER_ID)
+FROM CUSTOMER
+GROUP BY GRADE
+HAVING GRADE > (SELECT AVG(GRADE)
+				FROM CUSTOMER
+				WHERE CITY='BANGALORE');
