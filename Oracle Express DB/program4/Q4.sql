@@ -40,13 +40,11 @@ END;
 /*Note: Before execution of PL/SQL procedure, IAMARKS table contents are:*/ 
 SELECT * FROM IAMARKS;
 
-/* To run procedure, type the same
+-- To run procedure, type the same
 BEGIN
 AVGMARKS();
 END;
 /
-*/
 
-/* After executing the procedure, run this:
+-- After executing the procedure, run this:
 SELECT * FROM IAMARKS;
-*/
