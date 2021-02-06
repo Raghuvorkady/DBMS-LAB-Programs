@@ -1,3 +1,0 @@
-/*PRAGMA TABLE_info([SALESMAN]);*/
-PRAGMA TABLE_info([CUSTOMER]);
-/*PRAGMA TABLE_info([ORDERS]);*/

@@ -1,9 +1,0 @@
-/* 3. Create a view of Test1 marks of student USN ‘1BI15CS101’ in all subjects. */
-
-CREATE VIEW STU_TEST1_MARKS_VIEW
-AS
-SELECT TEST1, SUBCODE
-FROM IAMARKS
-WHERE USN = '1RN13CS091';
-
-SELECT * from STU_TEST1_MARKS_VIEW;
