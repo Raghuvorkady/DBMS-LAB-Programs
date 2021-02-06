@@ -2,7 +2,7 @@
 rating and find the highest number of stars that movie received. Sort the result by
 movie title. */
 
-SELECT MOV_TITLE, MAX (REV_STARS)
+SELECT MOV_TITLE, COUNT (REV_STARS)
 FROM MOVIES
 INNER JOIN RATING 
 USING (MOV_ID)
